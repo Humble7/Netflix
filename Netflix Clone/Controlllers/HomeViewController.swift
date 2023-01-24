@@ -6,6 +6,10 @@
 //
 
 import UIKit
+import RxSwift
+import RxDataSources
+import Action
+import NSObject_Rx
 
 enum Sections: Int {
     case TrendingMovies = 0
@@ -15,8 +19,8 @@ enum Sections: Int {
     case TopRated = 4
 }
 
-class HomeViewController: UIViewController {
-
+class HomeViewController: UIViewController, BindableType {
+    var viewModel: TrendingMovieViewModel!
     let sectionTitles: [String] = ["Trending Movies", "Trending Tv", "Popular", "Upcoming Movies", "Top Rated"]
     
     private let homeFeedTable: UITableView = {
@@ -58,6 +62,67 @@ class HomeViewController: UIViewController {
         
         homeFeedTable.frame = view.bounds
     }
+    
+    private func isVisibleForSection(section: Int) -> Bool {
+        let indexes = self.homeFeedTable.indexPathsForVisibleRows?.filter { $0.section ==  section}
+        if let indexes = indexes, !indexes.isEmpty {
+            return true
+        }
+        return false
+    }
+    
+    func bindViewModel() {
+        self.viewModel.trendingMovies
+            .observeOn(MainScheduler.instance)
+            .filter({ _ in
+                self.isVisibleForSection(section: Sections.TrendingMovies.rawValue)
+            })
+            .subscribe(onNext: { _ in
+                self.homeFeedTable.reloadSections([Sections.TrendingMovies.rawValue], animationStyle: .none)
+        })
+        .disposed(by: self.rx.disposeBag)
+        
+        self.viewModel.trendingTvs
+            .observeOn(MainScheduler.instance)
+            .filter({ _ in
+                self.isVisibleForSection(section: Sections.TrendingTv.rawValue)
+            })
+            .subscribe { _ in
+                self.homeFeedTable.reloadSections([Sections.TrendingTv.rawValue], animationStyle: .none)
+            }
+            .disposed(by: self.rx.disposeBag)
+        
+        self.viewModel.popular
+            .observeOn(MainScheduler.instance)
+            .filter({ _ in
+                self.isVisibleForSection(section: Sections.Popular.rawValue)
+            })
+            .subscribe { _ in
+                self.homeFeedTable.reloadSections([Sections.Popular.rawValue], animationStyle: .none)
+            }
+            .disposed(by: self.rx.disposeBag)
+        
+        self.viewModel.upcomingMovies
+            .observeOn(MainScheduler.instance)
+            .filter({ _ in
+                self.isVisibleForSection(section: Sections.Upcoming.rawValue)
+            })
+            .subscribe { _ in
+                self.homeFeedTable.reloadSections([Sections.Upcoming.rawValue], animationStyle: .none)
+            }
+            .disposed(by: self.rx.disposeBag)
+        
+        self.viewModel.upcomingMovies
+            .observeOn(MainScheduler.instance)
+            .filter({ _ in
+                self.isVisibleForSection(section: Sections.TopRated.rawValue)
+            })
+            .subscribe { _ in
+                self.homeFeedTable.reloadSections([Sections.TopRated.rawValue], animationStyle: .none)
+            }
+            .disposed(by: self.rx.disposeBag)
+        
+    }
 
 }
 
@@ -77,51 +142,25 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         }
         switch indexPath.section {
         case Sections.TrendingMovies.rawValue:
-            APICaller.shared.getTrendingMovies { result in
-                switch result {
-                case .success(let titles):
-                    cell.configure(with: titles)
-                case .failure(let error):
-                    print(error)
-                }
+            if let titles = self.viewModel.trendingMovies.value {
+                cell.configure(with: titles)
             }
         case Sections.TrendingTv.rawValue:
-            APICaller.shared.getTrendingTvs { result in
-                switch result {
-                case .success(let titles):
-                    cell.configure(with: titles)
-                case .failure(let error):
-                    print(error)
-                }
+            if let titles = self.viewModel.trendingTvs.value {
+                cell.configure(with: titles)
             }
         case Sections.Popular.rawValue:
-            APICaller.shared.getPopular { result in
-                switch result {
-                case .success(let titles):
-                    cell.configure(with: titles)
-                case .failure(let error):
-                    print(error)
-                    
-                }
+            if let titles = self.viewModel.popular.value {
+                cell.configure(with: titles)
             }
         case Sections.Upcoming.rawValue:
-            APICaller.shared.getUpcomingMovies { result in
-                switch result {
-                case .success(let titles):
-                    cell.configure(with: titles)
-                case .failure(let error):
-                    print(error)
-                }
+            if let titles = self.viewModel.upcomingMovies.value {
+                cell.configure(with: titles)
             }
                 
         case Sections.TopRated.rawValue:
-            APICaller.shared.getTopRated { result in
-                switch result {
-                case .success(let titles):
-                    cell.configure(with: titles)
-                case .failure(let error):
-                    print(error)
-                }
+            if let titles = self.viewModel.topRated.value {
+                cell.configure(with: titles)
             }
         default:
             return UITableViewCell()

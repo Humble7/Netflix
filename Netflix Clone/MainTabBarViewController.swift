@@ -11,9 +11,11 @@ class MainTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        view.backgroundColor = .systemYellow
+        view.backgroundColor = .systemBackground
         
-        let vc1 = UINavigationController(rootViewController: HomeViewController())
+        let home = HomeViewController()
+        let vc1 = UINavigationController(rootViewController: home)
+        home.bindViewModel(to: TrendingMovieViewModel(trendingMovieService: TrendingMovieService()))
         let vc2 = UINavigationController(rootViewController: UpcomingViewController())
         let vc3 = UINavigationController(rootViewController: SearchViewController())
         let vc4 = UINavigationController(rootViewController: DownloadsViewController())

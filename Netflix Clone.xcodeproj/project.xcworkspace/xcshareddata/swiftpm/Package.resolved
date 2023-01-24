@@ -1,6 +1,42 @@
 {
   "pins" : [
     {
+      "identity" : "action",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/RxSwiftCommunity/Action.git",
+      "state" : {
+        "revision" : "77a1aba64490424b485b54ffbd0bdecc3abaa046",
+        "version" : "4.2.0"
+      }
+    },
+    {
+      "identity" : "nsobject-rx",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/RxSwiftCommunity/NSObject-Rx.git",
+      "state" : {
+        "revision" : "3dc30072b740ec35a3949ac8a8217f590a7c59b7",
+        "version" : "5.1.1"
+      }
+    },
+    {
+      "identity" : "rxdatasources",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/RxSwiftCommunity/RxDataSources.git",
+      "state" : {
+        "revision" : "a18cee01c9ee55f04d0c7eb15c77a96c3648c88e",
+        "version" : "4.0.1"
+      }
+    },
+    {
+      "identity" : "rxswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ReactiveX/RxSwift.git",
+      "state" : {
+        "revision" : "002d325b0bdee94e7882e1114af5ff4fe1e96afa",
+        "version" : "5.1.1"
+      }
+    },
+    {
       "identity" : "sdwebimage",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
