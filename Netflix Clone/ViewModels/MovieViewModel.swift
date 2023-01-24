@@ -21,12 +21,14 @@ struct MovieViewModel {
     let popular = BehaviorRelay<[Title]?>(value: [])
     let upcomingMovies = BehaviorRelay<[Title]?>(value: [])
     let topRated = BehaviorRelay<[Title]?>(value: [])
-
+    
     private let trendingMovieService: TrendingMovieServiceType
+    private let sceneCoordinator: SceneCoordinatorType
     private let bag = DisposeBag()
     
-    init(trendingMovieService: TrendingMovieServiceType) {
+    init(trendingMovieService: TrendingMovieServiceType, coordinator: SceneCoordinatorType) {
         self.trendingMovieService = trendingMovieService
+        self.sceneCoordinator = coordinator
         bindOutput()
     }
     

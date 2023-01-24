@@ -10,32 +10,38 @@ class MainTabBarViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate, let window = sceneDelegate.window else {
+          fatalError()
+        }
+        
         view.backgroundColor = .systemBackground
         
+        // home view controller
         let home = MovieViewController()
-        let vc1 = UINavigationController(rootViewController: home)
-        home.bindViewModel(to: MovieViewModel(trendingMovieService: TrendingMovieService()))
+        let rootHomeVC = UINavigationController(rootViewController: home)
+        let service = TrendingMovieService()
+        let sceneCoordinator = SceneCoordinator(window: window)
+        let moviesViewModel = MovieViewModel(trendingMovieService: service, coordinator: sceneCoordinator)
+        home.bindViewModel(to: moviesViewModel)
+        
         let vc2 = UINavigationController(rootViewController: UpcomingViewController())
         let vc3 = UINavigationController(rootViewController: SearchViewController())
         let vc4 = UINavigationController(rootViewController: DownloadsViewController())
         
-        vc1.tabBarItem.image = UIImage(systemName: "house")
+        rootHomeVC.tabBarItem.image = UIImage(systemName: "house")
         vc2.tabBarItem.image = UIImage(systemName: "play.circle")
         vc3.tabBarItem.image = UIImage(systemName: "magnifyingglass")
         vc4.tabBarItem.image = UIImage(systemName: "square.and.arrow.down")
         
-        vc1.title = "Home"
+        rootHomeVC.title = "Home"
         vc2.title = "Coming Soon"
         vc3.title = "Top Search"
         vc4.title = "Downloads"
         
         tabBar.tintColor = .label
         
-        setViewControllers([vc1, vc2, vc3, vc4], animated: true)
-        
+        setViewControllers([rootHomeVC, vc2, vc3, vc4], animated: true)
     }
-
-
 }
 

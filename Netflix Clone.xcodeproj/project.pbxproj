@@ -35,6 +35,10 @@
 		9880C5FE297E354900CD5404 /* TrendingMovieServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9880C5FD297E354900CD5404 /* TrendingMovieServiceType.swift */; };
 		9880C600297E368200CD5404 /* BindableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9880C5FF297E368200CD5404 /* BindableType.swift */; };
 		9880C602297ED4A100CD5404 /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9880C601297ED4A100CD5404 /* MovieViewModel.swift */; };
+		9880C616297FE31900CD5404 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9880C615297FE31900CD5404 /* Scene.swift */; };
+		9880C618297FE90100CD5404 /* SceneCoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9880C617297FE90100CD5404 /* SceneCoordinatorType.swift */; };
+		9880C61A297FE99100CD5404 /* SceneTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9880C619297FE99100CD5404 /* SceneTransitionType.swift */; };
+		9880C61C297FEA9400CD5404 /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9880C61B297FEA9400CD5404 /* SceneCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +62,10 @@
 		9880C5FD297E354900CD5404 /* TrendingMovieServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingMovieServiceType.swift; sourceTree = "<group>"; };
 		9880C5FF297E368200CD5404 /* BindableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindableType.swift; sourceTree = "<group>"; };
 		9880C601297ED4A100CD5404 /* MovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModel.swift; sourceTree = "<group>"; };
+		9880C615297FE31900CD5404 /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
+		9880C617297FE90100CD5404 /* SceneCoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinatorType.swift; sourceTree = "<group>"; };
+		9880C619297FE99100CD5404 /* SceneTransitionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneTransitionType.swift; sourceTree = "<group>"; };
+		9880C61B297FEA9400CD5404 /* SceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +108,7 @@
 		9880C599297BD68A00CD5404 /* Netflix Clone */ = {
 			isa = PBXGroup;
 			children = (
+				9880C614297FE30D00CD5404 /* Scenes */,
 				9880C5FA297E335800CD5404 /* Services */,
 				9880C5BA297CD41700CD5404 /* Resources */,
 				9880C5B9297C206200CD5404 /* Models */,
@@ -169,6 +178,17 @@
 				9880C5FD297E354900CD5404 /* TrendingMovieServiceType.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		9880C614297FE30D00CD5404 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				9880C615297FE31900CD5404 /* Scene.swift */,
+				9880C617297FE90100CD5404 /* SceneCoordinatorType.swift */,
+				9880C619297FE99100CD5404 /* SceneTransitionType.swift */,
+				9880C61B297FEA9400CD5404 /* SceneCoordinator.swift */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9880C602297ED4A100CD5404 /* MovieViewModel.swift in Sources */,
+				9880C61A297FE99100CD5404 /* SceneTransitionType.swift in Sources */,
 				9880C600297E368200CD5404 /* BindableType.swift in Sources */,
 				9880C5B4297BD95900CD5404 /* SearchViewController.swift in Sources */,
 				9880C5C9297D806A00CD5404 /* TitleCollectionViewCell.swift in Sources */,
@@ -271,6 +292,9 @@
 				9880C5BF297D0C4A00CD5404 /* HeroHeaderUIView.swift in Sources */,
 				9880C5B6297BD98000CD5404 /* DownloadsViewController.swift in Sources */,
 				9880C5FE297E354900CD5404 /* TrendingMovieServiceType.swift in Sources */,
+				9880C61C297FEA9400CD5404 /* SceneCoordinator.swift in Sources */,
+				9880C616297FE31900CD5404 /* Scene.swift in Sources */,
+				9880C618297FE90100CD5404 /* SceneCoordinatorType.swift in Sources */,
 				9880C59B297BD68A00CD5404 /* AppDelegate.swift in Sources */,
 				9880C5C5297D592500CD5404 /* Extensions.swift in Sources */,
 				9880C59D297BD68A00CD5404 /* SceneDelegate.swift in Sources */,
