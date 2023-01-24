@@ -1,8 +1,8 @@
 //
-//  TrendingMovieViewModel.swift
+//  MovieViewModel.swift
 //  Netflix Clone
 //
-//  Created by mozat on 23/1/23.
+//  Created by ChenZhen on 23/1/23.
 //
 
 import Foundation
@@ -13,7 +13,7 @@ import RxCocoa
 
 typealias TrendingMovieSection = SectionModel<String, Title>
 
-struct TrendingMovieViewModel {
+struct MovieViewModel {
     
     // MARK: - Output
     let trendingMovies = BehaviorRelay<[Title]?>(value: [])

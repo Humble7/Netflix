@@ -1,7 +1,7 @@
 //
 //  MainTabBarViewController.swift
 //  Netflix Clone
-//  Created by mozat on 21/1/23.
+//  Created by ChenZhen on 21/1/23.
 //
 
 import UIKit
@@ -13,9 +13,9 @@ class MainTabBarViewController: UITabBarController {
         // Do any additional setup after loading the view.
         view.backgroundColor = .systemBackground
         
-        let home = HomeViewController()
+        let home = MovieViewController()
         let vc1 = UINavigationController(rootViewController: home)
-        home.bindViewModel(to: TrendingMovieViewModel(trendingMovieService: TrendingMovieService()))
+        home.bindViewModel(to: MovieViewModel(trendingMovieService: TrendingMovieService()))
         let vc2 = UINavigationController(rootViewController: UpcomingViewController())
         let vc3 = UINavigationController(rootViewController: SearchViewController())
         let vc4 = UINavigationController(rootViewController: DownloadsViewController())

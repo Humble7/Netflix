@@ -2,7 +2,7 @@
 //  TrendingMovieService.swift
 //  Netflix Clone
 //
-//  Created by mozat on 23/1/23.
+//  Created by ChenZhen on 23/1/23.
 //
 
 import Foundation
