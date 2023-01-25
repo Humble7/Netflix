@@ -26,6 +26,7 @@ class MovieViewController: UIViewController, BindableType {
     private let homeFeedTable: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(CollectionViewTableViewCell.self, forCellReuseIdentifier: CollectionViewTableViewCell.identifier)
+        table.register(MovieTableViewrHeaderView.self, forHeaderFooterViewReuseIdentifier: MovieTableViewrHeaderView.identifier)
         return table
     }()
     
@@ -176,19 +177,14 @@ extension MovieViewController: UITableViewDelegate, UITableViewDataSource {
         return 40
     }
     
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        guard let header = view as? UITableViewHeaderFooterView else {
-            return
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: MovieTableViewrHeaderView.identifier) as! MovieTableViewrHeaderView
+        if section == 0 {
+            headerView.configure(headerTitle: sectionTitles[section])
+        } else {
+            headerView.configure(headerTitle: sectionTitles[section], buttonTitle: "See All ", buttonImage: UIImage(systemName: "arrow.right.circle"))
         }
-        
-        header.textLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
-        header.textLabel?.frame = CGRect(x: header.bounds.origin.x, y: header.bounds.origin.y, width: 100, height: header.bounds.height)
-        header.textLabel?.textColor = .white
-        header.textLabel?.text = header.textLabel?.text?.captializeFirstLetter()
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sectionTitles[section]
+        return headerView
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

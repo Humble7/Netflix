@@ -39,6 +39,7 @@
 		9880C618297FE90100CD5404 /* SceneCoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9880C617297FE90100CD5404 /* SceneCoordinatorType.swift */; };
 		9880C61A297FE99100CD5404 /* SceneTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9880C619297FE99100CD5404 /* SceneTransitionType.swift */; };
 		9880C61C297FEA9400CD5404 /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9880C61B297FEA9400CD5404 /* SceneCoordinator.swift */; };
+		9880C6202981138A00CD5404 /* MovieTableViewrHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9880C61F2981138A00CD5404 /* MovieTableViewrHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		9880C617297FE90100CD5404 /* SceneCoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinatorType.swift; sourceTree = "<group>"; };
 		9880C619297FE99100CD5404 /* SceneTransitionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneTransitionType.swift; sourceTree = "<group>"; };
 		9880C61B297FEA9400CD5404 /* SceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinator.swift; sourceTree = "<group>"; };
+		9880C61F2981138A00CD5404 /* MovieTableViewrHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewrHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 				9880C5BC297CD49800CD5404 /* CollectionViewTableViewCell.swift */,
 				9880C5BE297D0C4A00CD5404 /* HeroHeaderUIView.swift */,
 				9880C5C8297D806A00CD5404 /* TitleCollectionViewCell.swift */,
+				9880C61F2981138A00CD5404 /* MovieTableViewrHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				9880C59F297BD68A00CD5404 /* MainTabBarViewController.swift in Sources */,
 				9880C5BD297CD49800CD5404 /* CollectionViewTableViewCell.swift in Sources */,
 				9880C5FC297E350500CD5404 /* TrendingMovieService.swift in Sources */,
+				9880C6202981138A00CD5404 /* MovieTableViewrHeaderView.swift in Sources */,
 				9880C5BF297D0C4A00CD5404 /* HeroHeaderUIView.swift in Sources */,
 				9880C5B6297BD98000CD5404 /* DownloadsViewController.swift in Sources */,
 				9880C5FE297E354900CD5404 /* TrendingMovieServiceType.swift in Sources */,
