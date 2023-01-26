@@ -12,6 +12,8 @@ import RxCocoa
 
 class SceneCoordinator: SceneCoordinatorType {
     
+    static public var shared: SceneCoordinator!
+    
     private var window: UIWindow
     private var currentViewController: UIViewController
     
@@ -22,9 +24,12 @@ class SceneCoordinator: SceneCoordinatorType {
     
     static func actualViewController(for viewController: UIViewController) -> UIViewController {
         if let navigationController = viewController as? UINavigationController {
-            return navigationController.viewControllers.first!
+            return actualViewController(for: navigationController.viewControllers.first!)
         } else if let tabBarController = viewController as? UITabBarController {
-            return tabBarController.selectedViewController!
+            guard let selectedViewController = tabBarController.selectedViewController else {
+                return tabBarController
+            }
+            return actualViewController(for: selectedViewController)
         } else {
             return viewController
         }
@@ -34,7 +39,6 @@ class SceneCoordinator: SceneCoordinatorType {
     func transition(to scene: Scene, type: SceneTransitionType) -> Completable {
         let subject = PublishSubject<Void>()
         let viewController = scene.viewController()
-        
         switch type {
         case .root:
             currentViewController = SceneCoordinator.actualViewController(for: viewController)
@@ -43,7 +47,16 @@ class SceneCoordinator: SceneCoordinatorType {
         case .modal:
             fatalError("Not supported")
         case .push:
-            fatalError("Not supported")
+            guard let navigationController = currentViewController.navigationController else {
+                fatalError("Can't push a view controller without a current navigaitn controller.")
+            }
+            
+            // one-off subscription to be nofified when push complete
+            _ = navigationController.rx.delegate
+                .sentMessage(#selector(UINavigationControllerDelegate.navigationController(_:didShow:animated:)))
+                .map { _ in }
+                .bind(to: subject)
+            navigationController.pushViewController(viewController, animated: true)
         }
         
         return subject.asObservable()

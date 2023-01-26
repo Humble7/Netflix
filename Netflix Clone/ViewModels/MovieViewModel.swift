@@ -54,8 +54,12 @@ struct MovieViewModel {
             .disposed(by: bag)
     }
     
-    
-    
+    func onClickSingleMovie(title: Title?) -> CocoaAction {
+        return CocoaAction { _ in
+            return self.sceneCoordinator.transition(to: Scene.emptyPage("Test"), type: .push).asObservable()
+                .map { _ in }
+        }
+    }
         
 }
 

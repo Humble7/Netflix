@@ -11,6 +11,7 @@ import UIKit
 enum Scene {
     case tabBar
     case movies(MovieViewModel)
+    case emptyPage(String)
 }
 
 extension Scene {
@@ -21,6 +22,11 @@ extension Scene {
             return vc
         case .movies(_):
             return UIViewController()
+        case .emptyPage(let title):
+            let vc = UIViewController()
+            vc.view.backgroundColor = .systemBrown
+            vc.title = title
+            return vc
         }
     }
 }

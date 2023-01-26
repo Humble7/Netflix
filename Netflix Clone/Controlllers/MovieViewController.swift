@@ -145,6 +145,7 @@ extension MovieViewController: UITableViewDelegate, UITableViewDataSource {
         case Sections.TrendingMovies.rawValue:
             if let titles = self.viewModel.trendingMovies.value {
                 cell.configure(with: titles)
+                cell.configure(with: titles, action: viewModel.onClickSingleMovie(title: titles.first))
             }
         case Sections.TrendingTv.rawValue:
             if let titles = self.viewModel.trendingTvs.value {

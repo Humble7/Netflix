@@ -11,18 +11,14 @@ class MainTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate, let window = sceneDelegate.window else {
-          fatalError()
-        }
-        
         view.backgroundColor = .systemBackground
         
         // home view controller
         let home = MovieViewController()
         let rootHomeVC = UINavigationController(rootViewController: home)
         let service = TrendingMovieService()
-        let sceneCoordinator = SceneCoordinator(window: window)
-        let moviesViewModel = MovieViewModel(trendingMovieService: service, coordinator: sceneCoordinator)
+        
+        let moviesViewModel = MovieViewModel(trendingMovieService: service, coordinator: SceneCoordinator.shared)
         home.bindViewModel(to: moviesViewModel)
         
         let vc2 = UINavigationController(rootViewController: UpcomingViewController())
