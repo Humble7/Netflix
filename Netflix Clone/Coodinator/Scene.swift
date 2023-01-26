@@ -10,7 +10,7 @@ import UIKit
 
 enum Scene {
     case tabBar
-    case movies(MovieViewModel)
+    case movies(HomeViewModel)
     case emptyPage(String)
 }
 

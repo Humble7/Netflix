@@ -14,11 +14,11 @@ class MainTabBarViewController: UITabBarController {
         view.backgroundColor = .systemBackground
         
         // home view controller
-        let home = MovieViewController()
+        let home = HomeViewController()
         let rootHomeVC = UINavigationController(rootViewController: home)
         let service = TrendingMovieService()
         
-        let moviesViewModel = MovieViewModel(trendingMovieService: service, coordinator: SceneCoordinator.shared)
+        let moviesViewModel = HomeViewModel(trendingMovieService: service, coordinator: SceneCoordinator.shared)
         home.bindViewModel(to: moviesViewModel)
         
         let vc2 = UINavigationController(rootViewController: UpcomingViewController())

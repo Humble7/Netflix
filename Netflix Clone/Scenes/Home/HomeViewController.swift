@@ -1,5 +1,5 @@
 //
-//  MovieViewController.swift
+//  HomeViewController.swift
 //  Netflix Clone
 //
 //  Created by ChenZhen on 21/1/23.
@@ -19,8 +19,8 @@ enum Sections: Int {
     case TopRated = 4
 }
 
-class MovieViewController: UIViewController, BindableType {
-    var viewModel: MovieViewModel!
+class HomeViewController: UIViewController, BindableType {
+    var viewModel: HomeViewModel!
     let sectionTitles: [String] = ["Trending Movies", "Trending Tv", "Popular", "Upcoming Movies", "Top Rated"]
     
     private let homeFeedTable: UITableView = {
@@ -127,7 +127,7 @@ class MovieViewController: UIViewController, BindableType {
 
 }
 
-extension MovieViewController: UITableViewDelegate, UITableViewDataSource {
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return sectionTitles.count
