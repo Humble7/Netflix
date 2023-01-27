@@ -10,8 +10,9 @@ import UIKit
 
 enum Scene {
     case tabBar
-    case movies(HomeViewModel)
-    case emptyPage(String)
+    case movieDetail(MovieDetailViewModel)
+    case moviesOverview(MoviesOverviewViewModel)
+    case emptyPage(String)  // just for test
 }
 
 extension Scene {
@@ -20,8 +21,14 @@ extension Scene {
         case .tabBar:
             let vc = MainTabBarViewController()
             return vc
-        case .movies(_):
-            return UIViewController()
+        case .movieDetail(let viewModel):
+            let vc = MovieDetailViewController()
+            vc.bindViewModel(to: viewModel)
+            return vc
+        case .moviesOverview(let viewModel):
+            let vc = MoviesOverviewViewController()
+            vc.bindViewModel(to: viewModel)
+            return vc
         case .emptyPage(let title):
             let vc = UIViewController()
             vc.view.backgroundColor = .systemBrown

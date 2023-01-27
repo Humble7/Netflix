@@ -40,6 +40,10 @@
 		9880C61A297FE99100CD5404 /* SceneTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9880C619297FE99100CD5404 /* SceneTransitionType.swift */; };
 		9880C61C297FEA9400CD5404 /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9880C61B297FEA9400CD5404 /* SceneCoordinator.swift */; };
 		9880C6202981138A00CD5404 /* MovieTableViewrHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9880C61F2981138A00CD5404 /* MovieTableViewrHeaderView.swift */; };
+		9880C62D2982642600CD5404 /* MovieDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9880C62C2982642600CD5404 /* MovieDetailViewModel.swift */; };
+		9880C62F298264B100CD5404 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9880C62E298264B100CD5404 /* MovieDetailViewController.swift */; };
+		9880C634298285B600CD5404 /* MoviesOverviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9880C633298285B600CD5404 /* MoviesOverviewViewModel.swift */; };
+		9880C636298285F200CD5404 /* MoviesOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9880C635298285F200CD5404 /* MoviesOverviewViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +72,10 @@
 		9880C619297FE99100CD5404 /* SceneTransitionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneTransitionType.swift; sourceTree = "<group>"; };
 		9880C61B297FEA9400CD5404 /* SceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinator.swift; sourceTree = "<group>"; };
 		9880C61F2981138A00CD5404 /* MovieTableViewrHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewrHeaderView.swift; sourceTree = "<group>"; };
+		9880C62C2982642600CD5404 /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModel.swift; sourceTree = "<group>"; };
+		9880C62E298264B100CD5404 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
+		9880C633298285B600CD5404 /* MoviesOverviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesOverviewViewModel.swift; sourceTree = "<group>"; };
+		9880C635298285F200CD5404 /* MoviesOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesOverviewViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +182,8 @@
 		9880C62129824FE500CD5404 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				9880C6302982852300CD5404 /* MoviesOverview */,
+				9880C62B298263F300CD5404 /* MovieDetail */,
 				9880C6222982506100CD5404 /* Views */,
 				9880C601297ED4A100CD5404 /* HomeViewModel.swift */,
 				9880C5AF297BD8EC00CD5404 /* HomeViewController.swift */,
@@ -256,6 +266,24 @@
 				9880C5B5297BD98000CD5404 /* DownloadsViewController.swift */,
 			);
 			path = Downloads;
+			sourceTree = "<group>";
+		};
+		9880C62B298263F300CD5404 /* MovieDetail */ = {
+			isa = PBXGroup;
+			children = (
+				9880C62C2982642600CD5404 /* MovieDetailViewModel.swift */,
+				9880C62E298264B100CD5404 /* MovieDetailViewController.swift */,
+			);
+			path = MovieDetail;
+			sourceTree = "<group>";
+		};
+		9880C6302982852300CD5404 /* MoviesOverview */ = {
+			isa = PBXGroup;
+			children = (
+				9880C633298285B600CD5404 /* MoviesOverviewViewModel.swift */,
+				9880C635298285F200CD5404 /* MoviesOverviewViewController.swift */,
+			);
+			path = MoviesOverview;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -351,15 +379,19 @@
 				9880C602297ED4A100CD5404 /* HomeViewModel.swift in Sources */,
 				9880C61A297FE99100CD5404 /* SceneTransitionType.swift in Sources */,
 				9880C600297E368200CD5404 /* BindableType.swift in Sources */,
+				9880C636298285F200CD5404 /* MoviesOverviewViewController.swift in Sources */,
 				9880C5B4297BD95900CD5404 /* SearchViewController.swift in Sources */,
+				9880C62F298264B100CD5404 /* MovieDetailViewController.swift in Sources */,
 				9880C5C9297D806A00CD5404 /* TitleCollectionViewCell.swift in Sources */,
 				9880C59F297BD68A00CD5404 /* MainTabBarViewController.swift in Sources */,
+				9880C62D2982642600CD5404 /* MovieDetailViewModel.swift in Sources */,
 				9880C5BD297CD49800CD5404 /* CollectionViewTableViewCell.swift in Sources */,
 				9880C5FC297E350500CD5404 /* TrendingMovieService.swift in Sources */,
 				9880C6202981138A00CD5404 /* MovieTableViewrHeaderView.swift in Sources */,
 				9880C5BF297D0C4A00CD5404 /* HeroHeaderUIView.swift in Sources */,
 				9880C5B6297BD98000CD5404 /* DownloadsViewController.swift in Sources */,
 				9880C5FE297E354900CD5404 /* TrendingMovieServiceType.swift in Sources */,
+				9880C634298285B600CD5404 /* MoviesOverviewViewModel.swift in Sources */,
 				9880C61C297FEA9400CD5404 /* SceneCoordinator.swift in Sources */,
 				9880C616297FE31900CD5404 /* Scene.swift in Sources */,
 				9880C618297FE90100CD5404 /* SceneCoordinatorType.swift in Sources */,

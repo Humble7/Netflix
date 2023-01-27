@@ -9,12 +9,18 @@ import UIKit
 import RxSwift
 import Action
 
+protocol CollectionViewTableViewCellDelegate: AnyObject {
+    func collectionViewTableViewCell(_ cell: CollectionViewTableViewCell, didSelectItemAt indexPath: IndexPath)
+}
+
 class CollectionViewTableViewCell: UITableViewCell {
 
     static let identifier = "CollectionViewTableViewCell"
     
+    public weak var delegate: CollectionViewTableViewCellDelegate?
+    
+    private var section: Int!
     private var titles: [Title] = [Title]()
-    private var action: CocoaAction?
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 140, height: 200)
@@ -42,23 +48,16 @@ class CollectionViewTableViewCell: UITableViewCell {
         collectionView.frame = contentView.bounds
     }
     
-    public func configure(with titles: [Title]) {
+    public func configure(with titles: [Title], section: Int) {
+        self.section = section
         self.titles = titles
-        DispatchQueue.main.async { [weak self] in
-            self?.collectionView.reloadData()
-        }
-    }
-    
-    public func configure(with titles: [Title], action: CocoaAction) {
-        self.titles = titles
-        self.action = action
         DispatchQueue.main.async { [weak self] in
             self?.collectionView.reloadData()
         }
     }
     
     override func prepareForReuse() {
-        self.action = nil
+        self.section = nil
     }
 }
 
@@ -79,8 +78,7 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let action = action {
-            action.execute()
-        }
+        let ip = IndexPath(row: indexPath.row, section: section)
+        self.delegate?.collectionViewTableViewCell(self, didSelectItemAt: ip)
     }
 }

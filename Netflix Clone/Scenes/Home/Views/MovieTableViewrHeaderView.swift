@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Action
 
 class MovieTableViewrHeaderView: UITableViewHeaderFooterView {
     static let identifier = "MovieTableViewrHeaderView"
@@ -32,7 +33,7 @@ class MovieTableViewrHeaderView: UITableViewHeaderFooterView {
         return button
     }()
     
-    public func configure(headerTitle: String, buttonTitle: String? = nil, buttonImage: UIImage? = nil) {
+    public func configure(headerTitle: String, buttonTitle: String? = nil, buttonImage: UIImage? = nil, action: Action<[Title], Void>? = nil, titles: [Title]? = nil) {
         headerLabel.text = headerTitle
         showAllMoviesButton.isHidden = true
         
@@ -44,6 +45,10 @@ class MovieTableViewrHeaderView: UITableViewHeaderFooterView {
         if let buttonImage = buttonImage {
             showAllMoviesButton.setImage(buttonImage.withRenderingMode(.alwaysOriginal), for: .normal)
             showAllMoviesButton.isHidden = false
+        }
+        
+        if let titles = titles {
+            showAllMoviesButton.rx.bind(to: action!, input: titles)
         }
         
         layoutIfNeeded()

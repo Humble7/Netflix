@@ -127,6 +127,17 @@ class HomeViewController: UIViewController, BindableType {
 
 }
 
+extension HomeViewController: CollectionViewTableViewCellDelegate {
+    func collectionViewTableViewCell(_ cell: CollectionViewTableViewCell, didSelectItemAt indexPath: IndexPath) {
+        let input = viewModel.input
+        
+        guard let titles = titles(for: indexPath.section), indexPath.row < titles.count else {
+            return
+        }
+        input.movieDetailAction.inputs.onNext(titles[indexPath.row])
+    }
+}
+
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -141,32 +152,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.identifier, for: indexPath) as? CollectionViewTableViewCell else {
             return UITableViewCell()
         }
-        switch indexPath.section {
-        case Sections.TrendingMovies.rawValue:
-            if let titles = self.viewModel.trendingMovies.value {
-                cell.configure(with: titles)
-                cell.configure(with: titles, action: viewModel.onClickSingleMovie(title: titles.first))
-            }
-        case Sections.TrendingTv.rawValue:
-            if let titles = self.viewModel.trendingTvs.value {
-                cell.configure(with: titles)
-            }
-        case Sections.Popular.rawValue:
-            if let titles = self.viewModel.popular.value {
-                cell.configure(with: titles)
-            }
-        case Sections.Upcoming.rawValue:
-            if let titles = self.viewModel.upcomingMovies.value {
-                cell.configure(with: titles)
-            }
-                
-        case Sections.TopRated.rawValue:
-            if let titles = self.viewModel.topRated.value {
-                cell.configure(with: titles)
-            }
-        default:
+        cell.delegate = self
+        
+        guard let titles = titles(for: indexPath.section) else {
             return UITableViewCell()
         }
+        cell.configure(with: titles, section: indexPath.section)
         return cell
     }
      
@@ -181,16 +172,34 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: MovieTableViewrHeaderView.identifier) as! MovieTableViewrHeaderView
         if section == 0 {
-            headerView.configure(headerTitle: sectionTitles[section])
+            headerView.configure(headerTitle: sectionTitles[section], action: viewModel.allMovieAction)
         } else {
-            headerView.configure(headerTitle: sectionTitles[section], buttonTitle: "See All ", buttonImage: UIImage(systemName: "arrow.right.circle"))
+            headerView.configure(headerTitle: sectionTitles[section], buttonTitle: "See All ", buttonImage: UIImage(systemName: "arrow.right.circle"), action: viewModel.allMovieAction, titles: titles(for: section))
         }
         return headerView
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let defaultOffset = view.safeAreaInsets.top
-        let offset = scrollView.contentOffset.y + defaultOffset
-        navigationController?.navigationBar.transform = .init(translationX: 0, y: min(0, -offset))
+//        let defaultOffset = view.safeAreaInsets.top
+//        let offset = scrollView.contentOffset.y + defaultOffset
+//        navigationController?.navigationBar.transform = .init(translationX: 0, y: min(0, -offset))
     }
+    
+    private func titles(for section: Int) -> [Title]? {
+        switch section {
+        case Sections.TrendingMovies.rawValue:
+            return self.viewModel.trendingMovies.value
+        case Sections.TrendingTv.rawValue:
+            return self.viewModel.trendingTvs.value
+        case Sections.Popular.rawValue:
+            return self.viewModel.popular.value
+        case Sections.Upcoming.rawValue:
+            return self.viewModel.upcomingMovies.value
+        case Sections.TopRated.rawValue:
+            return self.viewModel.topRated.value
+        default:
+            return nil
+        }
+    }
+
 }

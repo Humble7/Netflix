@@ -13,7 +13,36 @@ import RxCocoa
 
 typealias TrendingMovieSection = SectionModel<String, Title>
 
-struct HomeViewModel {
+protocol HomeViewModelInput {
+    // TODO: loadMore
+    // TODO: refresh
+    
+    var movieDetailAction: Action<Title, Void> { get }
+    var allMovieAction: Action<[Title], Void> { get }
+}
+ 
+protocol HomeViewModelType {
+    var input: HomeViewModelInput { get }
+}
+
+class HomeViewModel: HomeViewModelType, HomeViewModelInput {
+    var input: HomeViewModelInput { return self }
+    lazy var movieDetailAction: Action<Title, Void> = {
+        return Action<Title, Void> { [unowned self] title in
+            let viewModel = MovieDetailViewModel(title: title)
+            return self.sceneCoordinator.transition(to: Scene.movieDetail(viewModel), type: .push)
+                .asObservable()
+                .map { _ in }
+        }
+    }()
+    
+    lazy var allMovieAction: Action<[Title], Void> =  {
+        return Action<[Title], Void> { [unowned self] titles in
+            let viewModel = MoviesOverviewViewModel(titles: titles)
+            return self.sceneCoordinator.transition(to: Scene.moviesOverview(viewModel), type: .push).asObservable()
+                .map { _ in }
+        }
+    }()
     
     // MARK: - Output
     let trendingMovies = BehaviorRelay<[Title]?>(value: [])
@@ -52,13 +81,6 @@ struct HomeViewModel {
         self.trendingMovieService.topRated()
             .bind(to: topRated)
             .disposed(by: bag)
-    }
-    
-    func onClickSingleMovie(title: Title?) -> CocoaAction {
-        return CocoaAction { _ in
-            return self.sceneCoordinator.transition(to: Scene.emptyPage("Test"), type: .push).asObservable()
-                .map { _ in }
-        }
     }
         
 }
