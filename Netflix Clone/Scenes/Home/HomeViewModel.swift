@@ -11,7 +11,7 @@ import RxDataSources
 import Action
 import RxCocoa
 
-typealias TrendingMovieSection = SectionModel<String, Title>
+typealias HomeSectionModel = SectionModel<String, HomeViewSectionCellModelType>
 
 protocol HomeViewModelInput {
     // TODO: loadMore
@@ -20,13 +20,21 @@ protocol HomeViewModelInput {
     var movieDetailAction: Action<Title, Void> { get }
     var allMovieAction: Action<[Title], Void> { get }
 }
+
+protocol HomeViewModelOutput {
+    // TODO: loadMore
+    // TODO: refresh
+    var sectionedItems: Observable<[HomeSectionModel]> { get }
+}
  
 protocol HomeViewModelType {
-    var input: HomeViewModelInput { get }
+    var inputs: HomeViewModelInput { get }
+    var outputs: HomeViewModelOutput { get }
 }
 
-class HomeViewModel: HomeViewModelType, HomeViewModelInput {
-    var input: HomeViewModelInput { return self }
+class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelOutput {
+    var inputs: HomeViewModelInput { return self }
+    var outputs: HomeViewModelOutput { return self }
     lazy var movieDetailAction: Action<Title, Void> = {
         return Action<Title, Void> { [unowned self] title in
             let viewModel = MovieDetailViewModel(title: title)
@@ -45,42 +53,34 @@ class HomeViewModel: HomeViewModelType, HomeViewModelInput {
     }()
     
     // MARK: - Output
-    let trendingMovies = BehaviorRelay<[Title]?>(value: [])
-    let trendingTvs = BehaviorRelay<[Title]?>(value: [])
-    let popular = BehaviorRelay<[Title]?>(value: [])
-    let upcomingMovies = BehaviorRelay<[Title]?>(value: [])
-    let topRated = BehaviorRelay<[Title]?>(value: [])
+    var sectionedItems: Observable<[HomeSectionModel]>
     
-    private let trendingMovieService: TrendingMovieServiceType
     private let sceneCoordinator: SceneCoordinatorType
     private let bag = DisposeBag()
     
-    init(trendingMovieService: TrendingMovieServiceType, coordinator: SceneCoordinatorType) {
-        self.trendingMovieService = trendingMovieService
+    init(coordinator: SceneCoordinatorType) {
         self.sceneCoordinator = coordinator
-        bindOutput()
-    }
-    
-    private func bindOutput() {
-        self.trendingMovieService.trendingMovies()
-            .bind(to: trendingMovies)
-            .disposed(by: bag)
+        // trending movies
+        let trendingMovieViewModel = HomeViewSectionCellModel(movieService: TrendingMovieService())
+        let trendingMovieSection = HomeSectionModel(model: "Trending Movies", items: [trendingMovieViewModel])
         
-        self.trendingMovieService.trendingTvs()
-            .bind(to: trendingTvs)
-            .disposed(by: bag)
+        // trending tvs
+        let trendingTvViewModel = HomeViewSectionCellModel(movieService: TrendingTvService())
+        let trendingTvSection = HomeSectionModel(model: "Trending Tv", items: [trendingTvViewModel])
         
-        self.trendingMovieService.popular()
-            .bind(to: popular)
-            .disposed(by: bag)
+        // popular movies
+        let popularMovieViewModel = HomeViewSectionCellModel(movieService: PopularMovieService())
+        let popularMovieSection = HomeSectionModel(model: "Popular", items: [popularMovieViewModel])
         
-        self.trendingMovieService.upcomingMovies()
-            .bind(to: upcomingMovies)
-            .disposed(by: bag)
+        // upcoming movies
+        let upcomingMovieViewModel = HomeViewSectionCellModel(movieService: UpcomingMovie())
+        let upcomingMovieSection = HomeSectionModel(model: "Upcoming Movies", items: [upcomingMovieViewModel])
         
-        self.trendingMovieService.topRated()
-            .bind(to: topRated)
-            .disposed(by: bag)
+        // upcoming movies
+        let topRatedMovieViewModel = HomeViewSectionCellModel(movieService: TopRatedMovie())
+        let topRatedMovieSection = HomeSectionModel(model: "Top Rated", items: [topRatedMovieViewModel])
+        
+        self.sectionedItems = Observable.of([trendingMovieSection, trendingTvSection, popularMovieSection, upcomingMovieSection, topRatedMovieSection])
     }
         
 }

@@ -16,9 +16,8 @@ class MainTabBarViewController: UITabBarController {
         // home view controller
         let home = HomeViewController()
         let rootHomeVC = UINavigationController(rootViewController: home)
-        let service = TrendingMovieService()
         
-        let moviesViewModel = HomeViewModel(trendingMovieService: service, coordinator: SceneCoordinator.shared)
+        let moviesViewModel = HomeViewModel(coordinator: SceneCoordinator.shared)
         home.bindViewModel(to: moviesViewModel)
         
         let vc2 = UINavigationController(rootViewController: UpcomingViewController())

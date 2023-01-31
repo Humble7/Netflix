@@ -8,10 +8,6 @@
 import Foundation
 import RxSwift
 
-protocol TrendingMovieServiceType {
-    func trendingMovies() -> Observable<[Title]>
-    func trendingTvs() -> Observable<[Title]>
-    func popular() -> Observable<[Title]>
-    func upcomingMovies() -> Observable<[Title]>
-    func topRated() -> Observable<[Title]>
+protocol MovieServiceType {
+    func movies() -> Observable<[Title]>
 }
